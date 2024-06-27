@@ -15,14 +15,16 @@ datasource db {
 
 model Event {
   id          String   @id @default(cuid())
+  object      String
   actor_id    String
   actor_name  String
   group       String
   action_id   String
+  action_object String
   action_name String
   target_id   String
   target_name String
   location    String
-  occurred_at DateTime
+  occurred_at String
   metadata    Json
 }
