@@ -12,18 +12,19 @@ const config: Config = {
       controlsBtn: "#575757",
       tableContent: "#1C1C1C",
       detailsLabel: "#929292",
+      placeholder: "#959595",
       detailsHeader: "#787878",
       detailsText: "#000000",
       gray: "#F5F5F5",
+      inputBorder: "#E0E0DF",
+      boxBorder: "#F0F0F0",
+      white: "#FFFFFF",
+      detailsBorder: "#DFDFDF",
+      loading: "#F8F8F8",
     },
     extend: {
-      fontFamily: {
-        inter: ["Inter", "sans-serif"],
-      },
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      spacing: {
+        "12": "47rem",
       },
     },
   },

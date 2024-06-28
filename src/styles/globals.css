@@ -1,11 +1,29 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-
 body {
-  font-family: 'Inter', sans-serif;
   font-size: 14px;
+}
+
+body #__next {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+body main {
+  scrollbar-color: transparent transparent;
+}
+
+.avatar-first {
+  background: linear-gradient(138.62deg, #f3994a 14.17%, #b325e2 84.99%);
+}
+
+.avatar-second {
+  background: linear-gradient(138.62deg, #9347df 14.17%, #ec1a46 84.99%);
+}
+
+.avatar-third {
+  background: linear-gradient(138.62deg, #8947fe 14.17%, #b319fe 84.99%);
 }

@@ -1,4 +1,6 @@
-import Image from "next/image";
+import { Controls } from "@/components/Controls";
+import { Events } from "@/components/Events";
+import { LoadMore } from "@/components/LoadMore";
 import { Inter } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -6,9 +8,11 @@ const inter = Inter({ subsets: ["latin"] });
 export default function Home() {
   return (
     <main
-      className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
+      className={`container mx-auto rounded-2xl rounded-b-2xl h-12 overflow-y-auto relative  ${inter.className}`}
     >
-      
+      <Controls />
+      <Events events={[]} />
+      <LoadMore />
     </main>
   );
 }
