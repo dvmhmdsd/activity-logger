@@ -11,7 +11,6 @@ export class EventValidator {
       'target_id',
       'target_name',
       'location',
-      'occurred_at',
     ];
 
     for (const property of requiredProperties) {

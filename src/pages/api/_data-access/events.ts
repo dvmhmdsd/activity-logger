@@ -14,6 +14,13 @@ export default class EventsDataAccess {
     this.validator = new EventValidator();
   }
 
+  async pollingForNewEvents(lastCreatedAt: string) {
+    return await this.prisma.event.findMany({
+      where: { occurred_at: { gt: lastCreatedAt } },
+      orderBy: { occurred_at: "desc" },
+    });
+  }
+
   async create(body: NextApiRequest["body"]): Promise<{
     event?: EventObject | null;
     error?: string | null;
@@ -53,15 +60,7 @@ export default class EventsDataAccess {
     target_id,
     action_id,
     name,
-  }: {
-    page: number;
-    limit: number;
-    search?: string;
-    actor_id?: string;
-    target_id?: string;
-    action_id?: string;
-    name?: string;
-  }) {
+  }: EventFilters) {
     const filters = this.buildFilters({
       actor_id,
       target_id,

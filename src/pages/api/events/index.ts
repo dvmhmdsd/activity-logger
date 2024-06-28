@@ -1,9 +1,8 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import EventsDataAccess from "../_data-access/events";
 
+const dataAccess = new EventsDataAccess();
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const dataAccess = new EventsDataAccess();
-
   if (req.method === "POST") {
     const { event, error } = await dataAccess.create({ data: req.body });
     if (error) {
@@ -11,6 +10,16 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     return res.status(201).json(event);
+  }
+
+  if (req.method === "GET" && req.query.lastCreatedAt) {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "GET");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+    const events = await dataAccess.pollingForNewEvents(
+      req.query.lastCreatedAt.toString()
+    );
+    return res.status(200).json(events);
   }
 
   if (req.method === "GET") {
