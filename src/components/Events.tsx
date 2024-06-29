@@ -4,7 +4,13 @@ import { useCallback, useState } from "react";
 import { EventDetails } from "./EventDetails";
 import { LoadingPlaceholder } from "./LoadingPlaceholder";
 
-export const Events = ({ events }: { events: EventObject[] }) => {
+export const Events = ({
+  events,
+  isLoading,
+}: {
+  events: EventObject[];
+  isLoading: boolean;
+}) => {
   const [activeEvent, setActiveEvent] = useState<EventObject | null>();
   const colorArr = ["first", "second", "third"];
 
@@ -25,10 +31,13 @@ export const Events = ({ events }: { events: EventObject[] }) => {
           <p className="p-5 py-3 w-3/12">date</p>
           <p className="p-5 w-1/12"></p>
         </header>
-        <main className="border-x border-boxBorder h-3/4 w-[calc(100% - 2px)]">
-          {events.length ? (
-            events.map((event) => (
-              <>
+        <main
+          className={`border-x border-boxBorder h-3/4 w-[calc(100% - 2px)] pb-${
+            isLoading ? "24" : 0
+          }`}
+        >
+          {events.length
+            ? events.map((event) => (
                 <section
                   key={event.id}
                   className="flex cursor-pointer hover:bg-gray mt-[2px]"
@@ -36,14 +45,14 @@ export const Events = ({ events }: { events: EventObject[] }) => {
                     setActiveEvent(event);
                   }}
                 >
-                  <p className="p-5 w-4/12 text-nowrap whitespace-nowrap text-ellipsis overflow-hidden">
+                  <div className="p-5 w-4/12 text-nowrap whitespace-nowrap text-ellipsis overflow-hidden">
                     <span
                       className={`uppercase mr-2 avatar-${getRandomColor()} rounded-[calc(50%)] w-6 h-6 p-1 text-xs text-center inline-block text-white`}
                     >
-                      {event.action_name[0]}
+                      {event.actor_name[0]}
                     </span>
                     {event.actor_name}
-                  </p>
+                  </div>
                   <p className="p-5 w-4/12 text-nowrap whitespace-nowrap text-ellipsis overflow-hidden">
                     {event.action_name}
                   </p>
@@ -54,12 +63,9 @@ export const Events = ({ events }: { events: EventObject[] }) => {
                     <ForwardIcon />
                   </p>
                 </section>
-                <LoadingPlaceholder />
-              </>
-            ))
-          ) : (
-            <EmptyPlaceholder />
-          )}
+              ))
+            : !isLoading && <EmptyPlaceholder />}
+          {isLoading && <LoadingPlaceholder />}
         </main>
       </article>
       {<EventDetails event={activeEvent!} onClose={closeDialog} />}
