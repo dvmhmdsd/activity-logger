@@ -15,7 +15,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   res.setHeader("Access-Control-Allow-Methods", "GET");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
-  if (req.headers.connector === "3rd party") {
+  if (req.headers.connector === "3rd Party") {
     const token = req.headers.authorization?.split(" ")[1];
     if (!accessTokens.includes(token as string)) {
       return res.status(401).json({ message: "Invalid access token" });
