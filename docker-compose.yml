@@ -9,10 +9,11 @@ services:
       DATABASE_URL: "postgresql://instatus:instatus@db:5432/activity"
     depends_on:
       - db
-    entrypoint: ["sh", "-c", "./wait-for-it.sh db:5432 -- npx prisma migrate deploy && npm start"]
 
   db:
+    container_name: instatus
     image: postgres:13
+    restart: always
     environment:
       POSTGRES_USER: instatus
       POSTGRES_PASSWORD: instatus
