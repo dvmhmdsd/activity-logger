@@ -2,15 +2,26 @@ import { Controls } from "@/components/Controls";
 import { Events } from "@/components/Events";
 import { LoadMore } from "@/components/LoadMore";
 import { useEvents } from "@/hooks/useEvents";
+import { EventObject } from "@/interfaces/Event.interface";
 import { Inter } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-  const { events, isLoading, filterEvents, searchEvents, loadMore, toggleLiveUpdates, isLive } =
-    useEvents();
+  const {
+    events,
+    isLoading,
+    filterEvents,
+    searchEvents,
+    loadMore,
+    toggleLiveUpdates,
+    isLive,
+    exportToCSV,
+  } = useEvents();
 
-  const exportToCsv = () => {};
+  const exportToCsv = () => {
+    exportToCSV(events!);
+  };
 
   const getLiveUpdates = () => {
     toggleLiveUpdates();
