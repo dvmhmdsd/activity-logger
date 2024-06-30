@@ -74,6 +74,13 @@ export const Controls = ({
             onChange={handleFilterChange}
           />
           <Input
+            name="target_id"
+            type="text"
+            className="block w-full rounded-s-lg border-inputBorder border p-3"
+            placeholder="Enter target_id..."
+            onChange={handleFilterChange}
+          />
+          <Input
             name="name"
             type="text"
             className="block w-full rounded-s-lg border-inputBorder border p-3"
