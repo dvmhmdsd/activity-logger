@@ -32,7 +32,12 @@ export function useEventDetails(event: EventObject) {
       fields: [
         {
           name: "readable",
-          value: new Date(event.occurred_at).toLocaleDateString(),
+          value: new Intl.DateTimeFormat("en-us", {
+            month: "short",
+            day: "numeric",
+            hour: "numeric",
+            minute: "numeric",
+          }).format(new Date(event.occurred_at)),
         },
       ],
     },

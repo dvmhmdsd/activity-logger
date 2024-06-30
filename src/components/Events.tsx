@@ -57,7 +57,12 @@ export const Events = ({
                     {event.action_name}
                   </p>
                   <p className="p-5 w-3/12 text-nowrap whitespace-nowrap text-ellipsis overflow-hidden">
-                    {new Date(event.occurred_at).toLocaleDateString()}
+                    {new Intl.DateTimeFormat("en-us", {
+                      month: "short",
+                      day: "numeric",
+                      hour: "numeric",
+                      minute: "numeric",
+                    }).format(new Date(event.occurred_at))}
                   </p>
                   <p className="p-5 w-1/12 text-right flex justify-end">
                     <ForwardIcon />
