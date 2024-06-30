@@ -16,6 +16,10 @@ body main {
   scrollbar-color: transparent transparent;
 }
 
+div[data-headlessui-state="open"] {
+  scrollbar-color: transparent transparent;
+}
+
 .avatar-first {
   background: linear-gradient(138.62deg, #f3994a 14.17%, #b325e2 84.99%);
 }

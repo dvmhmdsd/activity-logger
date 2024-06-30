@@ -22,11 +22,11 @@ export const EventDetails = ({
         <div className="flex min-h-full items-center justify-center p-4">
           <DialogPanel
             transition
-            className="w-5/6 max-w-4xl rounded-xl border border-detailsBorder bg-white p-6 backdrop-blur-2xl duration-300 ease-out data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0"
+            className="w-5/6 max-w-4xl max-h-64 overflow-auto rounded-xl border border-detailsBorder bg-white p-6 backdrop-blur-2xl duration-300 ease-out data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0"
           >
-            <section className="flex flex-wrap gap-4">
+            <section className="grid grid-cols-3 gap-4 justify-between">
               {structuredEventData.map((data) => (
-                <div key={data.title} className="mb-6 w-1/4">
+                <div key={data.title} className="">
                   {!!data.fields.length && (
                     <>
                       <h2 className="text-detailsHeader uppercase mb-4">
@@ -35,10 +35,10 @@ export const EventDetails = ({
                       <div className="flex flex-col">
                         {data.fields.map((field) => (
                           <div key={field.name} className="flex py-2">
-                            <p className="text-detailsLabel capitalize w-1/2">
+                            <p className="text-detailsLabel capitalize w-1/4 mr-2">
                               {field.name}
                             </p>
-                            <p className="text-detailsText">{field.value}</p>
+                            <p className="text-detailsText w-3/4 pl-6">{field.value}</p>
                           </div>
                         ))}
                       </div>
