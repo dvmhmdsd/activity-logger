@@ -1,11 +1,26 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import EventsDataAccess from "../_data-access/events";
 
+const accessTokens = [
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6Ik1vaGFtaWQgU2FhZCIsImlhdCI6MTYyMzkwMzMwMH0.F3dWfj2vQWUfyfVObAqzWi3TL7twGhU8N7XaMhF9UeE",
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IlNhbGVzIFJvYmVydCIsImlhdCI6MTYyMzkwMzMwMH0.LtjQ3FyF97UxH5J51Bp-2X2Yn3Zn1Cg0WUM0jDcWOBk",
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6Ik1vZHVsZSBTYWxleSIsImlhdCI6MTYyMzkwMzMwMH0.8ZtPjV3zFwp8lMm-_m6j4KtYw1oJ0dn4xR7qzbyciVQ",
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6Ik1hcmkgU2FhZCIsImlhdCI6MTYyMzkwMzMwMH0.PT6cQp0eRdZiOFu2i2HrEYIOg4n-Ks8JdKlmTzW_jfI",
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IlJlcXVlc3QgU2FsZSIsImlhdCI6MTYyMzkwMzMwMH0.YhYzXZjL3BdVZP1osjVhY7v5Vd8mZv9QgXw3RY5kE6E",
+];
+
 const dataAccess = new EventsDataAccess();
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
+  if (req.headers.connector === "3rd party") {
+    const token = req.headers.authorization?.split(" ")[1];
+    if (!accessTokens.includes(token as string)) {
+      return res.status(401).json({ message: "Invalid access token" });
+    }
+  }
 
   if (req.method === "POST") {
     const { event, error } = await dataAccess.create({ data: req.body });
